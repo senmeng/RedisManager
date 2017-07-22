@@ -1,0 +1,62 @@
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="/static/plug/bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/docs.min.css" />
+<link rel="stylesheet" href="/static/css/public.css" />
+<div class="container header hidden-xs">
+	<div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4 text-right">
+		{neq name="$Think.session.member_id" value=""}
+			<a href="/blog/index">{$Think.session.member_info.username}</a>
+			<a href="/user/logout">退出</a>		
+		{else/}
+			<a href="/login">登录</a>
+		{/neq}		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<a href="http://www.web3.xin"><img src="/static/images/logo.png" class="logo" alt="芝麻教程" /></a>
+		</div>
+		<div class="col-md-5"></div>
+		<div class="col-md-3">		
+			<form action="http://search.web3.xin/cse/search" target="_blank">
+				<div class="input-group" id="top-search">
+				<input type="search" class="form-control" id="bdcsMain" name="q" autocomplete="off" placeholder="请输入关键词">
+				<input type="hidden" name="cc" value="web3.xin">				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				</div>
+			</form>
+			
+			<script type="text/javascript">
+			(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;
+			bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=11117786566054289066' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);
+			var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+			</script>
+		</div>
+	</div>
+</div>
+
+<header class="navbar navbar-static-top bs-docs-nav navigation" id="top" role="banner">
+	<div class="container">
+		<div class="navbar-header">
+			<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+			<a href="/index.html" class="navbar-brand">芝麻教程</a>
+		</div>
+		<nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" aria-expanded="false" style="height: 1px;">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="//www.web3.xin" title="芝麻教程">首页</a>
+				</li>
+				<li class="active">
+					<a href="/soft.html" title="Mac 破解软件">软件</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>

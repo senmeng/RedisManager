@@ -1,0 +1,191 @@
+{extend name="layout/base" /}
+{block name="csslink"}
+<link rel="stylesheet" type="text/css" href="/static/plug/responsive/responsive.tabs.css" />
+{/block}
+{block name="css"}
+.tabs-list{padding:0px;}
+.tab-content { background-color:#f7f7f7 }
+.tab-content h4, .accordion-content h4 { margin-bottom:5px; }
+.tab-content p, .accordion-content p { margin-bottom:10px; }
+.panel-body{padding:5px}
+{/block}
+{block name="content"}
+<div class="tabs">
+    <ul class="tabs-list">
+        <li class="active"><a href="javascript:;">String</a></li>
+        <li><a href="javascript:;">Hash</a></li>
+        <li><a href="javascript:;">List</a></li>
+        <li><a href="javascript:;">Set</a></li>
+        <li><a href="javascript:;">Zset</a></li>
+    </ul>
+    <div class="tabs-container">
+        
+        <div class="tab-content" style="display:block;">
+            <form action="/edit/doSub.html?act=str" method="post">
+                <div class="panel-body">
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Key</label>
+                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>               
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-xs-4 col-md-8 col-sm-12">
+                            <label>Value</label>
+                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" data-required="true" placeholder="Value"></textarea>
+                        </div>
+                    </div>
+
+                    <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content">
+            <form action="/edit/doSub.html?act=hash" method="post">
+                <div class="panel-body">
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Key</label>
+                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Hash Key</label>
+                            <input type="text" name="hash_key" class="form-control parsley-validated" placeholder="Hash Key" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-xs-4 col-md-8 col-sm-12">
+                            <label>Value</label>
+                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" data-required="true" placeholder="Value"></textarea>
+                        </div>
+                    </div>
+
+                    <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content">
+            <form action="/edit/doSub.html?act=list" method="post">
+                <div class="panel-body">
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Key</label>
+                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Index</label>
+                            <input type="text" name="index" class="form-control parsley-validated" placeholder="Index" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-xs-4 col-md-8 col-sm-12">
+                            <label>Value</label>
+                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" data-required="true" placeholder="Value"></textarea>
+                        </div>
+                    </div>
+
+                    <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content">
+            <form action="/edit/doSub.html?act=set" method="post">
+                <div class="panel-body">
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Key</label>
+                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>               
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-xs-4 col-md-8 col-sm-12">
+                            <label>Value</label>
+                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" data-required="true" placeholder="Value"></textarea>
+                        </div>
+                    </div>
+
+                    <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content">
+            <form action="/edit/doSub.html?act=zset" method="post">
+                <div class="panel-body">
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Key</label>
+                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>Score</label>
+                            <input type="text" name="score" class="form-control parsley-validated" placeholder="Score" data-required="true">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-xs-4 col-md-8 col-sm-12">
+                            <label>Value</label>
+                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" data-required="true" placeholder="Value"></textarea>
+                        </div>
+                    </div>
+
+                    <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/plug/responsive/responsive.tabs.js"></script>
+{/block}
+{block name="js"}
+$(document).ready(function(){
+    $('.tabs').respTabs();
+});
+{/block}

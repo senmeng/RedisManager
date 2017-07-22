@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="robots" content="all">
+        <meta name="author" content="web3.xin">
+        <meta http-equiv="Cache-Control" content="no-transform" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{:config('site_name')} | {:config('conduct')}</title>
+        <meta name="keywords" content="HTML5,CSS3,PHP7,JavaScript,jQuery,XML,AJAX,ASP.NET,MySQL,SQL,Python,C++,php扩展,php内核">
+        <meta name="description" content="芝麻教程(www.web3.xin)提供了最全的编程技术基础教程, 介绍了HTML、CSS、Javascript、Python，Java，Ruby，C，PHP , MySQL等各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。">
+        {block name='csslink'}{/block}
+        <style>
+            .bs-callout {
+                margin: 10px 0;
+            }
+            {block name='css'}{/block}
+        </style>
+    </head>
+    <body>
+        {include file="../application/index/view/layout/header.html" /}
+        {block name="content"}{/block} 
+        {include file="../application/index/view/layout/footer.html" /}
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/plug/lazyload/jquery.lazyload.min.js"></script>
+        <script src="/static/plug/store/store.min.js"></script>
+        <script src="/static/js/index/pub.js"></script>
+        <script>
+            $(document).ready(function() {
+                $(".cat").click(function() {
+                    var i = $(this).index();
+                    $(".codecat").hide();
+                    $(".codecat").eq(i).fadeIn(200);
+                })
+
+                $("#all").click(function() {
+                    $(".codecat").fadeIn(200);
+                })
+
+                $("img.lazy").lazyload({
+                    effect: "fadeIn",
+                    threshold: 40
+                })                
+            });
+
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?b557f341d9d61b9052ecae1ce7283e9c";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+            (function(){
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(bp, s);
+            })();
+        </script>
+    </body>
+
+</html>

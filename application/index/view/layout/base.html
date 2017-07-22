@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="app">
+
+<head>
+    <meta charset="utf-8" />
+    <title>控制面板 - {block name="title"}{/block}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="/static/plug/font-awesome/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/plug/musik/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/static/plug/musik/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="/static/plug/musik/css/app.css" type="text/css" />
+    {block name="csslink"}{/block}    
+    <style>
+    {block name="css"}{/block} 
+    </style>
+</head>
+
+<body class="">
+    <section class="vbox">
+        <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+            <div class="navbar-header aside bg-info dk">
+                <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+                    <i class="icon-list"></i>
+                </a>
+                <a href="/admin/index.html" class="navbar-brand text-lt">
+                    <i class="fa fa-windows"></i>
+                    <span class="hidden-nav-xs m-l-sm">Musik</span>
+                </a>
+                <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
+                    <i class="icon-settings"></i>
+                </a>
+            </div>
+            <ul class="nav navbar-nav hidden-xs">
+                <li>
+                    <a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+                        <i class="fa fa-indent text"></i>
+                        <i class="fa fa-dedent text-active"></i>
+                    </a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
+                        </span>
+                        <input type="text" class="form-control input-sm no-border rounded" placeholder="Search songs, albums...">
+                    </div>
+                </div>
+            </form>
+        </header>
+        <section>
+            <section class="hbox stretch">
+                <!-- .aside -->
+                <aside class="bg-dark dk aside hidden-print" id="nav">
+                    <section class="vbox">
+                        <section class="w-f-md scrollable">
+                            <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
+                                {include file="../application/index/view/layout/menu_left.html" /}
+                            </div>
+                        </section>
+                        {include file="../application/index/view/layout/footer.html" /}
+                    </section>
+                </aside>
+                <!-- /.aside -->
+                <section id="content">
+                    <section class="vbox">
+                        <section class="scrollable wrapper">
+                            <!-- side content -->
+                            {block name="content"}{/block}
+                            <!-- / side content -->
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
+        </section>
+    </section>
+    </section>
+    </section>
+    <script src="/static/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/js/bootstrap.js"></script>
+    <!-- App -->
+    <script src="/static/plug/musik/js/app.js"></script>
+    {block name="script"}{/block}
+    <script>
+        $(document).ready(function() {           
+            //相关Js
+            {block name="js"}{/block}    
+        });       
+        {block name="jsother"}{/block}  
+    </script>
+
+</body>
+</html>

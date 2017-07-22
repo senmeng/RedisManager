@@ -1,0 +1,45 @@
+{extend name="layout/base" /}
+{block name="content"}
+<div class="row">
+    <div class="col-sm-6">
+        <section class="panel panel-default">
+            <header class="panel-heading bg-light no-border">
+                <div class="clearfix">
+                    <a href="#" class="pull-left thumb-md b-3x m-r">
+                        <img src="/static/image/redis-white.png">
+                    </a>
+                    <div class="clear">
+                        <div class="h3 m-t-xs m-b-xs">
+                            Redis Info
+                            <i class="fa fa-circle text-success pull-right text-xs m-t-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <ul class="list-group no-radius">
+                <li class="list-group-item">
+                    <span class="pull-right">{$info.redis_version}</span>
+                    redis_version
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-right">{$info['db'.$k]}</span>
+                    db{$k}
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-right">{$info.used_memory}</span>
+                    Redis 分配的内存总量
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-right">15,000</span>
+                    Neosoft company
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+<a href="https://github.com/senmeng/RedisManager" target="_blank">RedisManager On GitHub</a>
+{/block} {block name="script"}
+
+{/block}
+{block name="js"} 
+{/block}
