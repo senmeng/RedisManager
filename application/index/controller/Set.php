@@ -17,7 +17,7 @@ class Set extends Controller
         $info['val'] = $db->smembers($k);      
         $info['ttl'] = $db->ttl($k);
         $info['strlen'] = $db->scard($k);
-      
+   
         $this->assign('info',$info);        
         return $this->fetch();
     }

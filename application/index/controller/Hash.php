@@ -8,10 +8,10 @@ class Hash extends Controller
     public function index()
     {
 
-        //$act = input('get.act');
-        $k = 'hash';
+        $k = input('param.k');
         $server = config('redis.servers')[0];
         $db = RedisDB::getInstance($server);
+        $info['key'] = $k;
         $info['type'] = $db->type($k);
         $info['val'] = $db->hgetall($k);      
         $info['ttl'] = $db->ttl($k);

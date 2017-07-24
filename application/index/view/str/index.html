@@ -1,6 +1,7 @@
 {extend name="layout/base" /}
 {block name="csslink"}
 <link rel="stylesheet" href="/static/plug/musik/js/parsley/parsley.css" type="text/css" />
+<link rel="stylesheet" href="/static/plug/sweet-alert/sweet-alert.css" type="text/css" />{/block}
 {/block}
 {block name="content"}
 
@@ -9,7 +10,7 @@
         <div class="form-group pull-in clearfix">
             <div class="col-sm-6">
                 <label>String</label>&nbsp;&nbsp;&nbsp;<label>TTL:{$info.ttl}</label>
-                <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" required>
+                <input type="text" name="key" data-id="{$info.key}" class="form-control parsley-validated" value="{$info.key}" placeholder="Key" required>
             </div>
             <div class="col-sm-6">
             </div>
@@ -17,10 +18,18 @@
 
         <div class="form-group pull-in clearfix">
             <div class="col-sm-6">
-                <a id="" class="btn btn-sm btn-success">Rename</a>
-                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                <a href="#" class="btn btn-sm btn-info">Reload Value</a>
-                <a href="#" class="btn btn-sm btn-success">Set TTL</a>
+                <label>TTL</label>
+                <input type="text" name="ttl" class="form-control parsley-validated" value="{$info.ttl}" placeholder="Key" required>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div> 
+
+        <div class="form-group pull-in clearfix">
+            <div class="col-sm-6">
+                <a id="rename" class="btn btn-sm btn-success">Rename</a>
+                <a id="delete" class="btn btn-sm btn-danger">Delete</a>
+                <a id="ttl" class="btn btn-sm btn-success">Set TTL</a>
             </div>
         </div>         
 
@@ -32,13 +41,41 @@
         </div>
 
         <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
-            <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+            <button type="button" id="sub" class="btn btn-success btn-s-xs">Submit</button>
         </footer>
     </div>
 </form>
 {/block}
 {block name="script"}
-
+<script src="/static/plug/sweet-alert/sweet-alert.js"></script>
 {/block}
 {block name="js"} 
+$("#rename").click(function(){
+    var oldkey = $.trim($("input[name='key']").attr('data-id'));
+    var newkey =  $.trim($("input[name='key']").val());
+    $.post('/edit/rename.html',{oldkey:oldkey,newkey:newkey},function(data){
+        if(data.result.code=='OK'){
+            location.href = '/str/index/id/{$info.id}/k/'+newkey;
+        }
+    },'json')
+});
+$("#ttl").click(function(){
+    var key = $.trim($("input[name='key']").attr('data-id'));
+    var ttl =  $.trim($("input[name='ttl']").val());
+    $.post('/edit/expire.html',{key:key,seconds:ttl},function(data){
+        if(data.result.code=='OK'){
+            swal({title: data.result.msg,text:data.result.code,type:'success'}); 
+        }
+    },'json')
+});
+
+$("#sub").click(function(){
+    var key = $.trim($("input[name='key']").attr('data-id'));
+    var val =  $.trim($("textarea[name='val']").val());
+    $.post('/edit/set.html',{key:key,val:val,db_id:'{$info.id}',type:'str'},function(data){
+        if(data.result.code=='OK'){
+            swal({title: data.result.msg,text:data.result.code,type:'success'}); 
+        }
+    },'json')
+});
 {/block}

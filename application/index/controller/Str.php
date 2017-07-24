@@ -8,10 +8,12 @@ class Str extends Controller
     public function index()
     {
 
-        //$act = input('get.act');
-        $k = 'sen';
+        $id = input('param.id');
+        $k = input('param.k');
         $server = config('redis.servers')[0];
         $db = RedisDB::getInstance($server);
+        $info['key'] = $k;
+        $info['id'] = $id;
         $info['val'] = $db->get($k);
         $info['ttl'] = $db->ttl($k);
         $info['strlen'] = $db->strlen($k);

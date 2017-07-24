@@ -10,5 +10,6 @@ return [
         'auth' => '' // Warning: The password is sent in plain-text to the Redis server.
         )
     ),
-    'type'=> ['','str','set','lists','zset','hash']
+    'type'=> ['','str','set','lists','zset','hash'],
+    'type_name' => ['','String','Set','Lists','Zset','Hash'],
 ];
