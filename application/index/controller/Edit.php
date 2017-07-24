@@ -86,4 +86,20 @@ class Edit extends Controller
             return retJson(1006);
         }
     }
+
+    public function del(){
+
+        $key = input('post.key');
+        $db_id = input('post.db_id');
+
+        $server = config('redis.servers')[0];
+        $db = RedisDB::getInstance($server);
+        $db->select($db_id);
+        $res = $db->del($key);
+        if($res){
+            return retJson();
+        }else{
+            return retJson(1006);
+        }
+    }
 }

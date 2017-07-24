@@ -78,4 +78,15 @@ $("#sub").click(function(){
         }
     },'json')
 });
+
+$("#delete").click(function(){
+    var key = $.trim($("input[name='key']").attr('data-id'));
+    $.post('/edit/del.html',{key:key,db_id:'{$info.id}'},function(data){
+        if(data.result.code=='OK'){
+            location.href = '/dinfo/index/id/{$info.id}';
+        }else{
+            swal({title: data.result.msg,text:data.result.code,type:'success'}); 
+        }
+    },'json')
+});
 {/block}
