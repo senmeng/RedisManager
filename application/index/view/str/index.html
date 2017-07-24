@@ -1,43 +1,43 @@
 {extend name="layout/base" /}
+{block name="csslink"}
+<link rel="stylesheet" href="/static/plug/musik/js/parsley/parsley.css" type="text/css" />
+{/block}
 {block name="content"}
-<div class="row">
-    <div class="col-sm-6">
-        <section class="panel panel-default">
-            <header class="panel-heading bg-light no-border">
-                <div class="clearfix">
-                    <a href="#" class="pull-left thumb-md b-3x m-r">
-                        <img src="/static/image/redis-white.png">
-                    </a>
-                    <div class="clear">
-                        <div class="h3 m-t-xs m-b-xs">
-                            Redis Info
-                            <i class="fa fa-circle text-success pull-right text-xs m-t-sm"></i>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <ul class="list-group no-radius">
-                <li class="list-group-item">
-                    <span class="pull-right">{$info.redis_version}</span>
-                    redis_version
-                </li>
-                <li class="list-group-item">
-                    <span class="pull-right">{$info['db'.$k]}</span>
-                    db{$k}
-                </li>
-                <li class="list-group-item">
-                    <span class="pull-right">{$info.used_memory}</span>
-                    Redis 分配的内存总量
-                </li>
-                <li class="list-group-item">
-                    <span class="pull-right">15,000</span>
-                    Neosoft company
-                </li>
-            </ul>
-        </section>
+
+<form action="/edit/doSub.html?act=str"  data-parsley-validate class="form" method="post">
+    <div class="panel-body">
+        <div class="form-group pull-in clearfix">
+            <div class="col-sm-6">
+                <label>String</label>&nbsp;&nbsp;&nbsp;<label>TTL:{$info.ttl}</label>
+                <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" required>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div> 
+
+        <div class="form-group pull-in clearfix">
+            <div class="col-sm-6">
+                <a id="" class="btn btn-sm btn-success">Rename</a>
+                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                <a href="#" class="btn btn-sm btn-info">Reload Value</a>
+                <a href="#" class="btn btn-sm btn-success">Set TTL</a>
+            </div>
+        </div>         
+
+        <div class="form-group pull-in clearfix">
+            <div class="col-xs-4 col-md-8 col-sm-12">
+                <label>Value</label>&nbsp;&nbsp;&nbsp;Size:{$info.strlen}
+                <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" required placeholder="Value">{$info.val}</textarea>
+            </div>
+        </div>
+
+        <footer class="col-xs-4 col-md-8 col-sm-12 text-right">
+            <button type="submit" class="btn btn-success btn-s-xs">Submit</button>
+        </footer>
     </div>
-</div>
-{/block} {block name="script"}
+</form>
+{/block}
+{block name="script"}
 
 {/block}
 {block name="js"} 

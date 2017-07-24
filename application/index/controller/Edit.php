@@ -30,4 +30,19 @@ class Edit extends Controller
      
         echo $act;
     }
+
+    public function rename(){
+        
+        $oldkey = input('post.oldkey');
+        $newkey = input('post.newkey');
+        if($oldkey && $newkey){
+            $server = config('redis.servers')[0];
+            $db = RedisDB::getInstance($server);
+            if($db->rename($oldkey,$newkey)){
+                return retJson();
+            }else{
+                return retJson(6001);
+            }            
+        }
+    }
 }

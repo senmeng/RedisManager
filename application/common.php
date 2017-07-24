@@ -10,3 +10,6 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+function retJson($code='OK',$msg='',$data=''){
+    return ['result'=>['code'=>$code?:'OK','msg'=>$msg?:config("errorcode.$code")],'data'=>$data];
+}

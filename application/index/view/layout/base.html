@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>控制面板 - {block name="title"}{/block}</title>
+    <title>控制面板 - Redis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="/static/css/animate.css" type="text/css" />
     <link rel="stylesheet" href="/static/plug/font-awesome/font-awesome.min.css" type="text/css" />
@@ -24,9 +25,9 @@
                 <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
                     <i class="icon-list"></i>
                 </a>
-                <a href="/admin/index.html" class="navbar-brand text-lt">
+                <a href="/index.html" class="navbar-brand text-lt">
                     <i class="fa fa-windows"></i>
-                    <span class="hidden-nav-xs m-l-sm">Musik</span>
+                    <span class="hidden-nav-xs m-l-sm">Redis</span>
                 </a>
                 <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
                     <i class="icon-settings"></i>
@@ -67,7 +68,7 @@
                 <!-- /.aside -->
                 <section id="content">
                     <section class="vbox">
-                        <section class="scrollable wrapper">
+                        <section class="scrollable">
                             <!-- side content -->
                             {block name="content"}{/block}
                             <!-- / side content -->
@@ -87,7 +88,17 @@
     <script src="/static/plug/musik/js/app.js"></script>
     {block name="script"}{/block}
     <script>
-        $(document).ready(function() {           
+        $(document).ready(function() { 
+            $.post('/index/db_list',function(data){
+                var html = '';
+                $(data).each(function(index,item){
+                    html += '<li><a href="/dinfo/index/id/'+index+'.html" class="auto">';
+                    html += '<b class="badge bg-info pull-right">'+item.keys+'</b>';
+                    html += '<i class="fa fa-database text-xs"></i>';
+                    html += '<span>'+index+'</span></a></li>';
+                });
+                $('#db_list').html(html);
+            })          
             //相关Js
             {block name="js"}{/block}    
         });       

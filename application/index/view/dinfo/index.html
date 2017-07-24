@@ -1,0 +1,64 @@
+{extend name="layout/base" /}
+{block name="css"}
+#sidebar{
+    background-color: #e0eaec
+}
+{/block}
+{block name="content"}
+
+<section class="hbox stretch">
+    <section>
+        <section class="vbox">
+            <section class="scrollable padder-lg w-f-md" id="bjax-target">
+                <a href="#" class="pull-right text-muted m-t-lg" data-toggle="class:fa-spin"><i class="icon-refresh i-lg  inline" id="refresh"></i></a>
+                <h2 class="font-thin m-b">Discover <span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
+                    <span class="bar1 a1 bg-primary lter"></span>
+                    <span class="bar2 a2 bg-info lt"></span>
+                    <span class="bar3 a3 bg-success"></span>
+                    <span class="bar4 a4 bg-warning dk"></span>
+                    <span class="bar5 a5 bg-danger dker"></span>
+                    </span>
+                </h2>
+            </section>
+        </section>
+    </section>
+    <!-- side content -->
+    <aside class="aside-md bg-left dk" id="sidebar">
+        <section class="vbox animated fadeInRight">
+            <section class="w-f-md scrollable hover">
+                <h4 class="font-thin m-l-md m-t">Keys</h4>
+                <ul class="list-group no-bg no-borders auto m-t-n-xxs">
+                    {volist name="list" id="v"}
+                    <li class="list-group-item">
+                        <span class="pull-left thumb-xs m-t-xs m-l-xs m-r-sm">
+                        <i class="icon-key"></i>
+                      </span>
+                        <div class="clear">
+                            <div><a href="/dinfo/index/id/{$db_id}/k/{$v}.html">{$v}</a></div>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </section>
+            <footer class="footer footer-md bg-black">
+                <form class="" role="search">
+                    <div class="form-group clearfix m-b-none">
+                        <div class="input-group m-t m-b">
+                            <span class="input-group-btn">
+                          <button type="submit" class="btn btn-sm bg-empty text-muted btn-icon"><i class="fa fa-search"></i></button>
+                        </span>
+                            <input type="text" class="form-control input-sm text-white bg-empty b-b b-dark no-border" placeholder="Search members">
+                        </div>
+                    </div>
+                </form>
+            </footer>
+        </section>
+    </aside>
+    <!-- / side content -->
+</section>
+
+{/block}
+{block name="script"}
+{/block}
+{block name="js"}
+{/block}

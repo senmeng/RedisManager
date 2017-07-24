@@ -3,20 +3,20 @@ namespace app\index\controller;
 
 use think\Controller;
 
-class Str extends Controller
+class Zset extends Controller
 {
     public function index()
     {
 
-        //$act = input('get.act');
-        $k = 'sen';
+        $k = input('param.k');
         $server = config('redis.servers')[0];
         $db = RedisDB::getInstance($server);
-        $info['val'] = $db->get($k);
+        $info['key'] = $k;
+        $info['type'] = $db->type($k);
+        $info['val'] = $db->zRange($k,0,10,true);      
         $info['ttl'] = $db->ttl($k);
-        $info['strlen'] = $db->strlen($k);
-        
-
+        $info['strlen'] = $db->zcard($k);
+    
         $this->assign('info',$info);        
         return $this->fetch();
     }

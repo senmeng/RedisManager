@@ -1,6 +1,7 @@
 {extend name="layout/base" /}
 {block name="csslink"}
 <link rel="stylesheet" type="text/css" href="/static/plug/responsive/responsive.tabs.css" />
+<link rel="stylesheet" href="/static/plug/musik/js/parsley/parsley.css" type="text/css" />
 {/block}
 {block name="css"}
 .tabs-list{padding:0px;}
@@ -10,6 +11,7 @@
 .panel-body{padding:5px}
 {/block}
 {block name="content"}
+<div class="wrapper">
 <div class="tabs">
     <ul class="tabs-list">
         <li class="active"><a href="javascript:;">String</a></li>
@@ -21,12 +23,12 @@
     <div class="tabs-container">
         
         <div class="tab-content" style="display:block;">
-            <form action="/edit/doSub.html?act=str" method="post">
+            <form action="/edit/doSub.html?act=str"  data-parsley-validate class="form" method="post">
                 <div class="panel-body">
                     <div class="form-group pull-in clearfix">
                         <div class="col-sm-6">
                             <label>Key</label>
-                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" data-required="true">
+                            <input type="text" name="key" class="form-control parsley-validated" placeholder="Key" required>
                         </div>
                         <div class="col-sm-6">
                         </div>
@@ -35,7 +37,7 @@
                     <div class="form-group pull-in clearfix">
                         <div class="col-xs-4 col-md-8 col-sm-12">
                             <label>Value</label>
-                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" data-required="true" placeholder="Value"></textarea>
+                            <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" required placeholder="Value"></textarea>
                         </div>
                     </div>
 
@@ -179,13 +181,34 @@
 
     </div>
 </div>
+</div>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/plug/responsive/responsive.tabs.js"></script>
+<script src="/static/plug/musik/js/parsley/parsley.min.js"></script>
+<script src="/static/plug/serializejson/jquery.serializejson.js"></script>
 {/block}
 {block name="js"}
 $(document).ready(function(){
-    $('.tabs').respTabs();
+    $('.tabs').respTabs();    
+    
+    $('.form').parsley().on('field:validated', function() {
+        var ok = $('.parsley-error').length === 0;
+        $('.bs-callout-info').toggleClass('hidden', !ok);
+        $('.bs-callout-warning').toggleClass('hidden', ok);
+    })
+    .on('form:submit', function() {       
+        $.post('/api/course/edit',$('#form').serializeJSON(),function(data){
+            if(data.result.code!='OK'){
+                swal({title: data.result.msg,text:data.result.code,type:'error'});return false;
+            }
+            if(window.localStorage) {
+                store.remove('menu');
+            }
+            swal({title: data.result.msg,text:data.result.code,type:'success'});         
+        },'json');
+        return false; // Don't submit form for this demo
+    });
 });
 {/block}

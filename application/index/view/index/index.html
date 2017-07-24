@@ -1,5 +1,6 @@
 {extend name="layout/base" /}
 {block name="content"}
+<div class="wrapper">
 <div class="row">
     <div class="col-sm-6">
         <section class="panel panel-default">
@@ -22,24 +23,27 @@
                     redis_version
                 </li>
                 <li class="list-group-item">
-                    <span class="pull-right">{$info['db'.$k]}</span>
-                    db{$k}
+                    <span class="pull-right">{$info.process_id}</span>
+                    process_id
                 </li>
                 <li class="list-group-item">
                     <span class="pull-right">{$info.used_memory}</span>
                     Redis 分配的内存总量
                 </li>
                 <li class="list-group-item">
-                    <span class="pull-right">15,000</span>
-                    Neosoft company
+                    <span class="pull-right">{$info.rdb_last_save_time|date="y-m-d H:i:s",###}</span>
+                    last_save_time
                 </li>
             </ul>
         </section>
     </div>
 </div>
 <a href="https://github.com/senmeng/RedisManager" target="_blank">RedisManager On GitHub</a>
-{/block} {block name="script"}
+</div>
+{/block}
+{block name="script"}
 
 {/block}
 {block name="js"} 
+
 {/block}
