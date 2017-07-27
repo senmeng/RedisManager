@@ -1,0 +1,9 @@
+tr td a{
+    margin:0 5px
+}
+.fa{
+    cursor:pointer
+}
+.fa-trash-o{
+    color:#d9534f
+}

@@ -7,31 +7,37 @@
 {/block}
 {block name="content"}
 
-<form action="/edit/doSub.html?act=str" data-parsley-validate class="form" method="post">
+<form action="/edit/doSub.html?act=str" data-parsley-validate id="form" method="post">
     <div class="panel-body">
         <div class="form-group pull-in clearfix">
             <div class="col-sm-6">
-                <label>Zset</label>&nbsp;&nbsp;&nbsp;<label>TTL:{$info.ttl}</label>
-                <input type="text" name="key" class="form-control parsley-validated" value="{$info.key}" placeholder="Key" required>
+                <label>Zset</label>
+                <input type="text" name="key" data-id="{$info.key}" class="form-control parsley-validated" value="{$info.key}" placeholder="Key" required>
             </div>
             <div class="col-sm-6">
             </div>
         </div>
 
-
+        <div class="form-group pull-in clearfix">
+            <div class="col-sm-6">
+                <label>TTL</label>
+                <input type="text" name="ttl" class="form-control parsley-validated" value="{$info.ttl}" placeholder="Key" required>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div> 
 
         <div class="form-group pull-in clearfix">
             <div class="col-sm-6">
-                <a id="" class="btn btn-sm btn-success">Rename</a>
-                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                <a href="#" class="btn btn-sm btn-info">Reload Value</a>
-                <a href="#" class="btn btn-sm btn-success">Set TTL</a>
+                <a id="rename" class="btn btn-sm btn-success">Rename</a>
+                <a id="delete" class="btn btn-sm btn-danger">Delete</a>
+                <a id="ttl" class="btn btn-sm btn-success">Set TTL</a>
             </div>
         </div>
 
         <section class="panel panel-default">
             <header class="panel-heading">
-                Hash Table
+                Hash Table &nbsp;&nbsp;&nbsp;Size:{$info.strlen}
             </header>
 
             <div class="table-responsive">
@@ -44,21 +50,30 @@
                         </tr>
                     </thead>
                     <tbody>                      
-                      {foreach $info.val as $k=>$v}
+                        {foreach $info.val as $k=>$v}
                         <tr>
                             <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
                             <td>{$k}</td>
                             <td>{$v}</td>
                         </tr>
-                          {/foreach}
+                            {/foreach}
                     </tbody>
                 </table>
-
+            </div>
         </section>
 
         <div class="form-group pull-in clearfix">
+            <div class="col-sm-6">
+                <label>Score</label>
+                <input type="text" name="score" class="form-control parsley-validated" placeholder="Score" required>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+
+        <div class="form-group pull-in clearfix">
             <div class="col-xs-4 col-md-8 col-sm-12">
-                <label>Value</label>&nbsp;&nbsp;&nbsp;Size:{$info.strlen}
+                <label>Value</label>
                 <textarea class="form-control parsley-validated" name="val" rows="6" data-minwords="6" required placeholder="Value"></textarea>
             </div>
         </div>
@@ -72,6 +87,53 @@
 
 {/block}
 {block name="script"}
+<script src="/static/plug/musik/js/parsley/parsley.min.js"></script>
 {/block}
 {block name="js"}
+$("#rename").click(function(){
+    var oldkey = $.trim($("input[name='key']").attr('data-id'));
+    var newkey =  $.trim($("input[name='key']").val());
+    $.post('/edit/rename.html',{oldkey:oldkey,newkey:newkey},function(data){
+        if(data.result.code=='OK'){
+            location.href = '/str/index/id/{$info.id}/k/'+newkey;
+        }
+    },'json')
+});
+$("#ttl").click(function(){
+    var key = $.trim($("input[name='key']").attr('data-id'));
+    var ttl =  $.trim($("input[name='ttl']").val());
+    $.post('/edit/expire.html',{key:key,seconds:ttl},function(data){
+        if(data.result.code=='OK'){
+            swal({title: data.result.msg,text:data.result.code,type:'success'}); 
+        }
+    },'json')
+});
+$("#delete").click(function(){
+    var key = $.trim($("input[name='key']").attr('data-id'));
+    $.post('/edit/del.html',{key:key,db_id:'{$info.id}'},function(data){
+        if(data.result.code=='OK'){
+            location.href = '/dinfo/index/id/{$info.id}';
+        }else{
+            swal({title: data.result.msg,text:data.result.code,type:'success'}); 
+        }
+    },'json')
+});
+$('#form').parsley().on('field:validated', function() {
+    var ok = $('.parsley-error').length === 0;
+    $('.bs-callout-info').toggleClass('hidden', !ok);
+    $('.bs-callout-warning').toggleClass('hidden', ok);
+})
+.on('form:submit', function() {       
+    var key = $.trim($("input[name='key']").attr('data-id'));
+    var score = $.trim($("input[name='score']").val());
+    var val =  $.trim($("textarea[name='val']").val());
+    $.post('/edit/set.html',{key:key,seconds:score,val:val,db_id:'{$info.id}',type:'zset'},function(data){
+        if(data.result.code=='OK'){
+            location.href = location.href;
+        }else{
+            swal({title: data.result.msg,text:data.result.code,type:'error'}); 
+        }
+    },'json');
+    return false; // Don't submit form for this demo
+});
 {/block}

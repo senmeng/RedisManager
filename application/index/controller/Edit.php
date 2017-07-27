@@ -67,6 +67,7 @@ class Edit extends Controller
 
         $type = input('post.type');
         $key = input('post.key');
+        $seconds = input('post.seconds',0);
         $val = input('post.val');
         $db_id = input('post.db_id');
 
@@ -77,7 +78,16 @@ class Edit extends Controller
         switch($type){
             case 'str':
                 $res = $db->set($key,$val);
-            break;
+                break;
+            case 'list':
+                $res = $db->rpushx($key,$val);
+                break;
+            case 'set':
+                $res = $db->sadd($key,$val);
+                break;
+            case 'zset':
+                $res = $db->zadd($key,$seconds,$val);
+                break;
         }
 
         if($res){
