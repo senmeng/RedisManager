@@ -199,7 +199,7 @@ $(document).ready(function(){
         $('.bs-callout-warning').toggleClass('hidden', ok);
     })
     .on('form:submit', function() {       
-        $.post('/api/course/edit',$('#form').serializeJSON(),function(data){
+        $.post('/edit/set',$('#form').serializeJSON(),function(data){
             if(data.result.code!='OK'){
                 swal({title: data.result.msg,text:data.result.code,type:'error'});return false;
             }
